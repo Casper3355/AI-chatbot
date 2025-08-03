@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat med AI</title>
+</head>
+<body>
+    <h1>Velkommen til AI'en</h1>
+    <input id="besked" placeholder="Skriv din besked her" />
+    <button onclick="send()">Send</button>
+    <pre id="svar"></pre>
+<script>
+function send() {
+    fetch("/chat", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({besked: document.getElementById("besked").value})
+    })
+    .then(res => res.json())
+    .then(data => document.getElementById("svar").textContent = data.svar);
+}
+</script>
+</body>
+</html>
